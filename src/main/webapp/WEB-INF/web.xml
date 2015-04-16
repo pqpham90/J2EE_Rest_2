@@ -9,7 +9,20 @@
             <param-value>assign.resources.UTCoursesApplication</param-value>
       </context-param>
 
+    <context-param>
+        <param-name>DBURL</param-name>
+        <param-value>jdbc:mysql://localhost:3306/myeavesdrop</param-value>
+    </context-param>
 
+    <context-param>
+        <param-name>DBUSERNAME</param-name>
+        <param-value>pqpham90</param-value>
+    </context-param>
+
+    <!--<context-param>-->
+        <!--<param-name>DBPASSWORD</param-name>-->
+        <!--<param-value></param-value>-->
+    <!--</context-param>-->
 
       <servlet>
         <servlet-name>Resteasy</servlet-name>
