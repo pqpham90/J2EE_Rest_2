@@ -1,0 +1,5 @@
+assign/domain/Course.class
+assign/services/CourseStudentService.class
+assign/resources/UTCoursesApplication.class
+assign/services/CourseStudentServiceImpl.class
+assign/resources/UTCoursesResource.class
