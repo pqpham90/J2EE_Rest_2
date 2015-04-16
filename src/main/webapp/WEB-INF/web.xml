@@ -19,10 +19,10 @@
         <param-value>pqpham90</param-value>
     </context-param>
 
-    <!--<context-param>-->
-        <!--<param-name>DBPASSWORD</param-name>-->
-        <!--<param-value></param-value>-->
-    <!--</context-param>-->
+    <context-param>
+        <param-name>DBPASSWORD</param-name>
+        <param-value>bKbYbK4A6QumJTrr</param-value>
+    </context-param>
 
       <servlet>
         <servlet-name>Resteasy</servlet-name>

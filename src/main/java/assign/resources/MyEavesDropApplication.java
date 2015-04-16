@@ -5,21 +5,21 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-@ApplicationPath("/example")
-public class UTCoursesApplication extends Application {
-	
+@ApplicationPath("/assignment5")
+public class MyEavesDropApplication extends Application {
+
 	private Set<Object> singletons = new HashSet<Object>();
 	private Set<Class<?>> classes = new HashSet<Class<?>>();
-		
-	public UTCoursesApplication() {
+
+	public MyEavesDropApplication() {
 	}
-	
+
 	@Override
 	public Set<Class<?>> getClasses() {
-		classes.add(UTCoursesResource.class);
+		classes.add(MyEavesDropResource.class);
 		return classes;
 	}
-	
+
 	@Override
 	public Set<Object> getSingletons() {
 		return singletons;

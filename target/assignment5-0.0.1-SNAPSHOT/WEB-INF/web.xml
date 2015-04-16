@@ -21,7 +21,7 @@
 
     <context-param>
         <param-name>DBPASSWORD</param-name>
-        <param-value>Holocron#64</param-value>
+        <param-value>bKbYbK4A6QumJTrr</param-value>
     </context-param>
 
       <servlet>
