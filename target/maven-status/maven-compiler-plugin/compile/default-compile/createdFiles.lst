@@ -1,5 +1,11 @@
-assign/domain/Course.class
+assign/services/MyEavesDropServiceImpl.class
 assign/services/CourseStudentService.class
-assign/resources/UTCoursesApplication.class
 assign/services/CourseStudentServiceImpl.class
+assign/domain/Project.class
+assign/services/MyEavesDropService.class
+assign/resources/MyEavesDropResource.class
+assign/domain/Meeting.class
+assign/resources/MyEavesDropApplication.class
 assign/resources/UTCoursesResource.class
+assign/domain/Course.class
+assign/resources/UTCoursesApplication.class
