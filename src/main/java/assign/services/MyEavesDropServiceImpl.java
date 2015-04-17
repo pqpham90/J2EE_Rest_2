@@ -31,6 +31,7 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
         return ds;
     }
 
+	// adds project to database
 	public Project addProject(Project p) throws Exception {
 		Connection conn = ds.getConnection();
 
@@ -61,6 +62,7 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
 		return p;
 	}
 
+	// updates project in database
 	public Project updateProject(Project p) throws Exception {
 		Connection conn = ds.getConnection();
 
@@ -84,6 +86,29 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
 		return p;
 	}
 
+	// delete project in database
+	public void deleteProject (int project_ID) throws  Exception {
+		Connection conn = ds.getConnection();
+		String delete_meetings = "DELETE FROM meetings WHERE fk_meeting_project= ?";
+		PreparedStatement stmt_meetings = conn.prepareStatement(delete_meetings,
+				Statement.RETURN_GENERATED_KEYS);
+		stmt_meetings.setInt(1, project_ID);
+
+		stmt_meetings.executeUpdate();
+
+		String delete_project = "DELETE FROM projects WHERE project_id=?";
+		PreparedStatement stmt_project = conn.prepareStatement(delete_project,
+				Statement.RETURN_GENERATED_KEYS);
+		stmt_project.setInt(1, project_ID);
+		int affectedRows = stmt_project.executeUpdate();
+		if (affectedRows == 0) {
+			throw new SQLException("Creating course failed, no rows affected.");
+		}
+
+		conn.close();
+	}
+
+	// get a project from database
 	public Project getProject(int project_ID) throws Exception {
 		String query = "select * from projects where project_id=" + project_ID;
 		Connection conn = ds.getConnection();
@@ -101,6 +126,7 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
 		return p;
 	}
 
+	// add metting to project in database
 	public Meeting addMeeting(Meeting m) throws Exception {
 		Connection conn = ds.getConnection();
 
@@ -132,6 +158,7 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
 		return m;
 	}
 
+	// parses out project info from database
 	public String getProjects(int project_ID) throws Exception {
 		String query = "select * from projects where project_id=" + project_ID;
 		Connection conn = ds.getConnection();
@@ -148,8 +175,9 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
 		return result;
 	}
 
-	public String getMeetings(int project_ID) throws Exception {
-		String query = "select * from meetings where fk_meeting_project=" + project_ID;
+	// parses out all meeting info from database
+	public String getMeetings(int meeting_ID) throws Exception {
+		String query = "select * from meetings where fk_meeting_project=" + meeting_ID;
 		Connection conn = ds.getConnection();
 		PreparedStatement s = conn.prepareStatement(query);
 		ResultSet r = s.executeQuery();

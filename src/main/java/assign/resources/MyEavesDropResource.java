@@ -43,6 +43,7 @@ public class MyEavesDropResource {
 		return Response.status(405).entity(result).build();
 	}
 
+	// create the project defined in xml
 	@POST
 	@Consumes("application/xml")
 	public Response createProject(InputStream is) {
@@ -58,6 +59,7 @@ public class MyEavesDropResource {
 		return Response.status(201).entity(result).build();
 	}
 
+	// update the project with the matching ID
 	@PUT
 	@Path("{id}")
 	@Consumes("application/xml")
@@ -84,6 +86,7 @@ public class MyEavesDropResource {
 		}
 	}
 
+	// adds a meeting to a project
 	@POST
 	@Path("{id}/meetings")
 	@Consumes("application/xml")
@@ -111,6 +114,7 @@ public class MyEavesDropResource {
 		return Response.status(201).entity(result).build();
 	}
 
+	// displays the full result of the project
 	@GET
 	@Path("{id}")
 	@Produces("application/xml")
@@ -148,18 +152,42 @@ public class MyEavesDropResource {
 
 		final String result = output;
 
+		// write out the xml
 		return new StreamingOutput() {
 			public void write(OutputStream outputStream) throws IOException, WebApplicationException
-		{
-			PrintStream writer = new PrintStream(outputStream);
-				writer.println(result);
-			}
-		};
-
-//		String result = "Displaying Project";
-//		return Response.status(200).entity(result).build();
+			{
+				PrintStream writer = new PrintStream(outputStream);
+					writer.println(result);
+				}
+			};
 	}
 
+	// deletes the project and all associated meetings
+	@DELETE
+	@Path("{id}")
+	public Response deleteProject(@PathParam("id") int id) {
+		Project current = null;
+
+		try {
+			current = myEavesDropService.getProject(id);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (current == null) throw new WebApplicationException(Response.Status.NOT_FOUND);
+
+		try {
+			myEavesDropService.deleteProject(id);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		String result = "Project Fully Deleted";
+		return Response.status(200).entity(result).build();
+	}
+
+	// parses xml for project data
 	protected Project readProject(InputStream is) {
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -186,6 +214,7 @@ public class MyEavesDropResource {
 		}
 	}
 
+	// parses xml for project data
 	protected Meeting readMeeting(InputStream is) {
 		try {
 			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
