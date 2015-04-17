@@ -7,7 +7,6 @@ import javax.sql.DataSource;
 import java.sql.*;
 
 public class MyEavesDropServiceImpl implements MyEavesDropService {
-
 	String dbURL = "";
 	String dbUsername = "";
 	String dbPassword = "";
@@ -31,15 +30,15 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
         return ds;
     }
 
-	public Project addCourse(Project c) throws Exception {
+	public Project addProject(Project c) throws Exception {
 		Connection conn = ds.getConnection();
 
-		String insert = "INSERT INTO courses(name, course_num) VALUES(?, ?)";
+		String insert = "INSERT INTO projects(name, description) VALUES(?, ?)";
 		PreparedStatement stmt = conn.prepareStatement(insert,
                 Statement.RETURN_GENERATED_KEYS);
 
 		stmt.setString(1, c.getName());
-//		stmt.setString(2, c.getCourseNum());
+		stmt.setString(2, c.getDescription());
 
 		int affectedRows = stmt.executeUpdate();
 
@@ -47,13 +46,13 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
             throw new SQLException("Creating course failed, no rows affected.");
         }
 
-//        ResultSet generatedKeys = stmt.getGeneratedKeys();
-//        if (generatedKeys.next()) {
-//        	c.setCourseId(generatedKeys.getInt(1));
-//        }
-//        else {
-//            throw new SQLException("Creating course failed, no ID obtained.");
-//        }
+        ResultSet generatedKeys = stmt.getGeneratedKeys();
+        if (generatedKeys.next()) {
+        	c.setProject_id(generatedKeys.getInt(1));
+        }
+        else {
+            throw new SQLException("Creating course failed, no ID obtained.");
+        }
 
         // Close the connection
         conn.close();
@@ -61,8 +60,8 @@ public class MyEavesDropServiceImpl implements MyEavesDropService {
 		return c;
 	}
 
-	public Project getCourse(int courseId) throws Exception {
-		String query = "select * from courses where course_id=" + courseId;
+	public Project getProject(int courseId) throws Exception {
+		String query = "select * from projects where project_id=" + courseId;
 		Connection conn = ds.getConnection();
 		PreparedStatement s = conn.prepareStatement(query);
 		ResultSet r = s.executeQuery();
