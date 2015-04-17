@@ -36,11 +36,11 @@ CREATE TABLE IF NOT EXISTS `myeavesdrop`.`meetings` (
   `meeting_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `year` VARCHAR(4) NOT NULL,
-  `projects_project_id` INT NOT NULL,
-  PRIMARY KEY (`meeting_id`, `projects_project_id`),
-  INDEX `fk_meetings_projects1_idx` (`projects_project_id` ASC),
+  `fk_meeting_project` INT NOT NULL,
+  PRIMARY KEY (`meeting_id`, `fk_meeting_project`),
+  INDEX `fk_meetings_projects1_idx` (`fk_meeting_project` ASC),
   CONSTRAINT `fk_meetings_projects`
-    FOREIGN KEY (`projects_project_id`)
+    FOREIGN KEY (`fk_meeting_project`)
     REFERENCES `myeavesdrop`.`projects` (`project_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

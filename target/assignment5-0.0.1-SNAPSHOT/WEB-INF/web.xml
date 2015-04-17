@@ -11,7 +11,7 @@
 
     <context-param>
         <param-name>DBURL</param-name>
-        <param-value>jdbc:mysql://localhost:3306/myeavesdrop</param-value>
+        <param-value>jdbc:mysql://givecaketo.me:3306/myeavesdrop</param-value>
     </context-param>
 
     <context-param>
