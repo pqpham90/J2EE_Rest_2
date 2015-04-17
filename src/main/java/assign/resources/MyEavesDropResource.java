@@ -1,7 +1,7 @@
 package assign.resources;
 
-import assign.services.CourseStudentService;
-import assign.services.CourseStudentServiceImpl;
+import assign.services.MyEavesDropService;
+import assign.services.MyEavesDropServiceImpl;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -12,7 +12,7 @@ import javax.ws.rs.core.Context;
 @Path("/myeavesdrop")
 public class MyEavesDropResource {
 
-	CourseStudentService courseStudentService;
+	MyEavesDropService myEavesDropService;
 	String password;
 	String username;
 	String dburl;
@@ -21,7 +21,7 @@ public class MyEavesDropResource {
 		dburl = servletContext.getInitParameter("DBURL");
 		username = servletContext.getInitParameter("DBUSERNAME");
 		password = servletContext.getInitParameter("DBPASSWORD");
-		this.courseStudentService = new CourseStudentServiceImpl(dburl, username, password);
+		this.myEavesDropService = new MyEavesDropServiceImpl(dburl, username, password);
 	}
 
 	@GET

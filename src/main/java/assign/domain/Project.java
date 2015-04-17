@@ -1,8 +1,11 @@
 package assign.domain;
 
-/**
- * Created by pqpham90 on 4/16/15.
- */
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "project")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Project {
 	int project_id;
 	String name;

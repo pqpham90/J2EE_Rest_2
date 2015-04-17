@@ -1,11 +1,11 @@
 package assign.services;
 
-import assign.domain.Course;
+import assign.domain.Project;
 
 public interface MyEavesDropService {
 
-	public Course addCourse(Course c) throws Exception;
+	public Project addCourse(Project c) throws Exception;
 
-	public Course getCourse(int courseId) throws Exception;
+	public Project getCourse(int courseId) throws Exception;
 
 }
